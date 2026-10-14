@@ -1,0 +1,70 @@
+import Image from "next/image";
+import { Quote } from "lucide-react";
+import { SectionHeading } from "@/components/shared/section-heading";
+
+export function OurStorySection() {
+  return (
+    <section className="w-full bg-[#FFFCF6]">
+      <div className="mx-auto flex min-h-[600px] max-w-[1440px]  flex-col items-center gap-8 px-[clamp(1.5rem,5vw,100px)] py-10 lg:flex-row lg:gap-[72px]">
+        {/* Story copy */}
+        <div className="flex w-full  flex-1 flex-col items-start gap-6">
+          <SectionHeading
+            eyebrow="OUR STORY"
+            title="Service, Enterprise And Continuous Growth."
+            accentColor="orange"
+          />
+
+          <p className="text-[18px] font-semibold leading-[22px] text-[#092A22]">
+            Bhee Light 07 Unique Global Ventures is a Nigerian business providing professional services across event
+            staffing, hospitality, travel and tourism, business development, and natural refreshments.
+          </p>
+
+          <p className="text-[16px] leading-[19px] text-[#625F56]">
+            Founded around the experience and vision of Blessing Chikaodi, the business brings together a passion for
+            people, service, entrepreneurship, and continuous growth. From providing professional ushers for events to
+            helping clients plan journeys and providing naturally made refreshments, our work is guided by one
+            commitment: To deliver quality, create positive experiences, and provide genuine value.
+          </p>
+
+          {/* Commitment */}
+          <figure className="flex items-center gap-4 self-stretch rounded-xl border border-[#D6CCBA] bg-[#F7F1E5] p-6">
+            <Quote
+              aria-hidden
+              size={26}
+              strokeWidth={1.5}
+              className="shrink-0 text-[#C69A4A]"
+            />
+            <blockquote className="font-[family-name:var(--font-lora)] text-[length:clamp(1.125rem,1.7vw,1.5rem)] italic leading-[1.4] text-[#123D32]">
+              &ldquo;To deliver quality, create positive experiences, and provide genuine value.&rdquo;
+            </blockquote>
+          </figure>
+        </div>
+
+        {/* Story images: 520 box, everything inside is a percentage so it scales */}
+        <div className="relative aspect-square w-full max-w-[520px] shrink-0 lg:w-[520px]">
+          {/* Main image: 430 / 520 */}
+          <div className="absolute left-0 top-0 h-[82.7%] w-[82.7%] overflow-hidden rounded-[22px]">
+            <Image
+              src="/images/about/our-story-detail.jpg"
+              alt="Bhee Light usher greeting guests at an event"
+              fill
+              sizes="(min-width: 1024px) 430px, 80vw"
+              className="object-cover"
+            />
+          </div>
+
+          {/* Detail image: 250x230, cream border cuts into the main image */}
+          <div className="absolute bottom-0 right-0 z-10 h-[44.2%] w-[48.1%] overflow-hidden rounded-[22px] border-[10px] border-[#FFFCF6]">
+            <Image
+              src="/images/about/our-story-main.jpg"
+              alt="Naturally made Nigerian fruit drinks"
+              fill
+              sizes="(min-width: 1024px) 250px, 45vw"
+              className="object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
