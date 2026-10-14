@@ -11,6 +11,9 @@ const lato = Lato({
 export const metadata: Metadata = {
   title: "Bhee Light - Professional Event Support & Quality Refreshments",
   description: "Bhee Light Unique Global Ventures provides professional event staffing, hospitality support, travel and tour services, business development solutions, and natural refreshments.",
+  icons: {
+    icon: "/images/bhee-light-logo.png",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
