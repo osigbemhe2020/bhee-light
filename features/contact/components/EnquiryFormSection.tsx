@@ -7,16 +7,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/shared/button";
 import { SectionHeading } from "@/components/shared/section-heading";
+import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 import { enquirySchema, type EnquiryFormData } from "../schemas/enquiry.schema";
 import { submitEnquiry } from "../services/submit-enquiry";
-
-const SERVICES = [
-  { value: "ushering", label: "Event Ushering & Guest Management" },
-  { value: "refreshments", label: "Natural Refreshments" },
-  { value: "travel", label: "Travel Planning & Tour Services" },
-  { value: "business", label: "Business Development & Marketing" },
-  { value: "general", label: "General Enquiry" },
-];
+import type { EnquiryServiceOption } from "@/data/services";
 
 const labelClass = "text-[14px] font-semibold leading-[17px] text-[#111110]";
 const inputClass =
@@ -45,7 +39,11 @@ function Field({
   );
 }
 
-export function EnquiryFormSection() {
+export function EnquiryFormSection({
+  serviceOptions,
+}: {
+  serviceOptions: EnquiryServiceOption[];
+}) {
   const [dateFocused, setDateFocused] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -91,9 +89,9 @@ export function EnquiryFormSection() {
 
   return (
     <section className="w-full bg-[#FFFCF6]">
-      <div className="mx-auto flex max-w-[1440px] flex-col items-stretch gap-8 px-[clamp(1rem,7vw,100px)] py-8 sm:gap-10 sm:py-10 xl:flex-row xl:items-start xl:gap-[68px]">
+      <RevealGroup className="mx-auto flex max-w-[1440px] flex-col items-stretch gap-8 px-[clamp(1rem,7vw,100px)] py-8 sm:gap-10 sm:py-10 xl:flex-row xl:items-start xl:gap-[68px]">
         {/* Enquiry introduction */}
-        <div className="flex w-full shrink-0 flex-col gap-6 sm:gap-7 xl:w-[430px]">
+        <RevealItem className="flex w-full shrink-0 flex-col gap-6 sm:gap-7 xl:w-[430px]">
           <div className="flex flex-col gap-4">
             <SectionHeading size="wide" eyebrow="Enquiry Form" title="Send Us an Enquiry" />
             <p className="text-[16px] leading-[19px] text-[#625F56]">
@@ -119,11 +117,11 @@ export function EnquiryFormSection() {
               respond.
             </p>
           </div>
-        </div>
+        </RevealItem>
 
         {/* Enquiry form */}
         {submitSuccess ? (
-          <div className="flex min-w-0 flex-1 flex-col items-center justify-center gap-6 rounded-[22px] bg-[#DCE8DF] p-[clamp(1.25rem,2.5vw,2.25rem)] shadow-[0_12px_32px_rgba(18,61,50,0.094)]">
+          <RevealItem className="flex min-w-0 flex-1 flex-col items-center justify-center gap-6 rounded-[22px] bg-[#DCE8DF] p-[clamp(1.25rem,2.5vw,2.25rem)] shadow-[0_12px_32px_rgba(18,61,50,0.094)]">
             <ShieldCheck size={64} strokeWidth={1.5} className="text-[#0D733A]" />
             <div className="text-center">
               <h3 className="text-[20px] font-semibold leading-[24px] text-[#092A22]">
@@ -142,11 +140,12 @@ export function EnquiryFormSection() {
             >
               Submit Another Enquiry
             </Button>
-          </div>
+          </RevealItem>
         ) : (
+          <RevealItem className="min-w-0 flex-1">
           <form
             onSubmit={handleFormSubmit((data) => onSubmit(data))}
-            className="flex min-w-0 flex-1 flex-col items-center gap-6 rounded-[22px] bg-[#F7F1E5] p-[clamp(1rem,2.5vw,2.25rem)] shadow-[0_12px_32px_rgba(18,61,50,0.094)] sm:gap-10"
+            className="flex w-full flex-col items-center gap-6 rounded-[22px] bg-[#F7F1E5] p-[clamp(1rem,2.5vw,2.25rem)] shadow-[0_12px_32px_rgba(18,61,50,0.094)] sm:gap-10"
           >
             {submitError && (
               <div className="w-full rounded-md bg-red-50 p-4 text-[14px] text-red-800">
@@ -205,7 +204,7 @@ export function EnquiryFormSection() {
                   </span>
                 )}
                 <div className="overflow-hidden rounded-md border border-[#D4D0C9] bg-[#FFFCF6]">
-                  {SERVICES.map(({ value, label }) => {
+                  {serviceOptions.map(({ value, label }) => {
                     const isSelected = selectedService === value;
                     return (
                       <label
@@ -269,8 +268,9 @@ export function EnquiryFormSection() {
               {isSubmitting ? "Submitting..." : "Submit Enquiry"}
             </Button>
           </form>
+          </RevealItem>
         )}
-      </div>
+      </RevealGroup>
     </section>
   );
 }

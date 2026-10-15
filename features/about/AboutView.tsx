@@ -5,12 +5,15 @@ import { OurStorySection } from "./components/OurStorySection";
 import { LeadershipSection } from "./components/LeadershipSection";
 import { EducationSection } from "./components/EducationSection";
 import { ApproachSection } from "./components/ApproachSection";
+import { getNavigationItems } from "@/data/navigation";
 
 
-export function AboutView() {
+export async function AboutView() {
+  const navItems = await getNavigationItems();
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <SiteHeader activePage="about" />
+      <SiteHeader activePage="about" navItems={navItems} />
 
       <main className="flex-1 pt-[72px] md:pt-[88px]">
         <PageHero

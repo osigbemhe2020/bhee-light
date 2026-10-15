@@ -7,11 +7,14 @@ import { WhatWeDoSection } from "./components/what-we-do-section";
 import { PurposeSection } from "./components/purpose-section";
 import { WhyChooseUsSection } from "./components/why-choose-us-section";
 import { WhoWeServeSection } from "./components/who-we-serve-section";
+import { getNavigationItems } from "@/data/navigation";
 
-export function LandingView() {
+export async function LandingView() {
+  const navItems = await getNavigationItems();
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <SiteHeader activePage="home" />
+      <SiteHeader activePage="home" navItems={navItems} />
 
       <main className="flex-1 pt-[72px] md:pt-[88px]">
         <HeroSection />

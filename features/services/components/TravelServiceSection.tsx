@@ -2,28 +2,30 @@ import Image from "next/image";
 import { Compass } from "lucide-react";
 import { Button } from "@/components/shared/button";
 import { SectionHeading } from "@/components/shared/section-heading";
+import { RevealGroup, RevealItem } from "@/components/shared/reveal";
+import { getTravelPillars } from "@/data/services";
 
-const PILLARS = ["Travel consultancy", "Journey planning", "Client support", "Tour guiding"];
+export async function TravelServiceSection() {
+  const pillars = await getTravelPillars();
 
-export function TravelServiceSection() {
   return (
     <section className="w-full bg-[#E5F9ED]">
-      <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-10 px-[clamp(1.5rem,7vw,100px)] py-14 lg:flex-row lg:gap-[72px]">
+      <RevealGroup className="mx-auto flex max-w-[1440px] flex-col items-center gap-10 px-[clamp(1.5rem,7vw,100px)] py-14 lg:flex-row lg:gap-[72px]">
         {/* Service imagery: framed photo, tilted */}
-        <div className="w-full max-w-[560px] shrink-0 rotate-1 rounded-[22px] bg-[#FFFCF6] p-3 lg:w-[560px]">
+        <RevealItem className="w-full max-w-[560px] shrink-0 rotate-1 rounded-[22px] bg-[#FFFCF6] p-3 lg:w-[560px]">
           <div className="relative aspect-[536/482] w-full rotate-1 overflow-hidden rounded-xl">
             <Image
-              src="/images/services/service-image-2.jpg"
+              src="/images/service-image-3.jpg"
               alt="Tour guide sharing the story of a pottery centre with a small group of visitors"
               fill
               sizes="(min-width: 1024px) 536px, 100vw"
               className="object-cover"
             />
           </div>
-        </div>
+        </RevealItem>
 
         {/* Service copy */}
-        <div className="flex w-full min-w-0 flex-1 flex-col items-start gap-12">
+        <RevealItem className="flex w-full min-w-0 flex-1 flex-col items-start gap-12">
           <div className="flex w-full flex-col gap-4">
             <SectionHeading
               eyebrow="Travel Planning & Tour Services"
@@ -39,7 +41,7 @@ export function TravelServiceSection() {
 
             {/* Travel pillars */}
             <ul className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              {PILLARS.map((label) => (
+              {pillars.map((label) => (
                 <li
                   key={label}
                   className="flex flex-col gap-3 rounded-xl border border-white/[0.14] bg-white/5 p-4"
@@ -54,8 +56,8 @@ export function TravelServiceSection() {
           </div>
 
           <Button>Enquire About Travel Services</Button>
-        </div>
-      </div>
+        </RevealItem>
+      </RevealGroup>
     </section>
   );
 }

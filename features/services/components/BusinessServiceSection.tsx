@@ -2,22 +2,17 @@ import Image from "next/image";
 import { Handshake } from "lucide-react";
 import { Button } from "@/components/shared/button";
 import { SectionHeading } from "@/components/shared/section-heading";
+import { RevealGroup, RevealItem } from "@/components/shared/reveal";
+import { getBusinessCapabilities } from "@/data/services";
 
-const CAPABILITIES = [
-  "Business development",
-  "Marketing",
-  "Client relations",
-  "Sales",
-  "Networking",
-  "Partnerships",
-];
+export async function BusinessServiceSection() {
+  const capabilities = await getBusinessCapabilities();
 
-export function BusinessServiceSection() {
   return (
     <section className="w-full bg-[#FFFCF6]">
-      <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-10 px-[clamp(1.5rem,7vw,100px)] py-10 lg:flex-row lg:gap-[72px]">
+      <RevealGroup className="mx-auto flex max-w-[1440px] flex-col items-center gap-10 px-[clamp(1.5rem,7vw,100px)] py-10 lg:flex-row lg:gap-[72px]">
         {/* Service copy */}
-        <div className="flex w-full min-w-0 flex-1 flex-col items-start gap-12">
+        <RevealItem className="flex w-full min-w-0 flex-1 flex-col items-start gap-12">
           <div className="flex w-full flex-col gap-6">
             <SectionHeading
               eyebrow="Business Development & Marketing"
@@ -32,7 +27,7 @@ export function BusinessServiceSection() {
 
             {/* Capabilities */}
             <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {CAPABILITIES.map((item) => (
+              {capabilities.map((item) => (
                 <li
                   key={item}
                   className="flex items-center gap-2 rounded-full bg-[#F9E7C7] px-[14px] py-3"
@@ -47,14 +42,14 @@ export function BusinessServiceSection() {
           </div>
 
           <Button>Work With Us</Button>
-        </div>
+        </RevealItem>
 
         {/* Service imagery: everything inside is a percentage of the 560 box */}
-        <div className="relative aspect-square w-full max-w-[560px] shrink-0 lg:w-[560px]">
+        <RevealItem className="relative aspect-square w-full max-w-[560px] shrink-0 lg:w-[560px]">
           {/* Main image: 510 / 560 */}
           <div className="absolute left-0 top-0 h-[91%] w-[91%] overflow-hidden rounded-[22px]">
             <Image
-              src="/images/services/service-image-4.jpg"
+              src="/images/bhee-light-img-6.jpeg"
               alt="Business professionals in a development meeting at a modern office"
               fill
               sizes="(min-width: 1024px) 510px, 90vw"
@@ -69,8 +64,8 @@ export function BusinessServiceSection() {
               Meaningful professional connections
             </p>
           </div>
-        </div>
-      </div>
+          </RevealItem>
+          </RevealGroup>
     </section>
   );
 }

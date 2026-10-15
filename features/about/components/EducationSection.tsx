@@ -1,12 +1,14 @@
 import { GraduationCap } from "lucide-react";
 import { SectionHeading } from "@/components/shared/section-heading";
+import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 
 export function EducationSection() {
   return (
     <section className="w-full bg-[#F7F1E5]">
-      <div className="mx-auto flex min-h-[459px] max-w-[1440px] flex-col items-center gap-10 px-[clamp(1.5rem,7vw,100px)] py-10 lg:flex-row lg:gap-16">
+      <RevealGroup className="mx-auto flex min-h-[459px] max-w-[1440px] flex-col items-center gap-10 px-[clamp(1.5rem,7vw,100px)] py-10 lg:flex-row lg:gap-16">
         {/* Education card */}
-        <article className="flex w-full max-w-[440px] shrink-0 flex-col gap-7 rounded-[22px] bg-[#FFFCF6] p-[clamp(1.5rem,3vw,2.75rem)] shadow-[0_12px_32px_rgba(18,61,50,0.094)] lg:w-[440px]">
+        <RevealItem className="w-full max-w-[440px] shrink-0 lg:w-[440px]">
+          <article className="flex w-full flex-col gap-7 rounded-[22px] bg-[#FFFCF6] p-[clamp(1.5rem,3vw,2.75rem)] shadow-[0_12px_32px_rgba(18,61,50,0.094)]">
           <div className="flex items-center gap-4">
             <div className="flex size-16 shrink-0 items-center justify-center rounded-full bg-[#123D32]">
               <GraduationCap
@@ -30,10 +32,11 @@ export function EducationSection() {
           <p className="text-[18px] leading-[22px] text-[#111110]">
             Background in Biology Education &bull; Teachers Registration Council of Nigeria (TRCN) certificate
           </p>
-        </article>
+          </article>
+        </RevealItem>
 
         {/* Education copy */}
-        <div className="flex w-full flex-1 flex-col gap-6">
+        <RevealItem className="flex w-full flex-1 flex-col gap-6">
           <SectionHeading
             eyebrow="Education & Professional Development"
             title="Learning, Growing and Becoming Better"
@@ -50,8 +53,8 @@ export function EducationSection() {
               professional growth.
             </p>
           </div>
-        </div>
-      </div>
+          </RevealItem>
+          </RevealGroup>
     </section>
   );
 }

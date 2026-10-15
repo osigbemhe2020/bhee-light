@@ -20,6 +20,10 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Content data
+
+Page content arrays are kept in the `data/` directory and exposed through async getter functions. The current getters return local seed data, so Server Components and client-facing components consume content using the same async boundary they can use later for a backend or Sanity query. The enquiry form receives its options from the server-rendered contact page.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

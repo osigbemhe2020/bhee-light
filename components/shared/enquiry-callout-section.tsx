@@ -1,5 +1,6 @@
 import { Button } from "@/components/shared/button";
 import { SectionHeading } from "@/components/shared/section-heading";
+import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 
 interface EnquiryCalloutSectionProps {
   eyebrow?: string;
@@ -26,26 +27,31 @@ export function EnquiryCalloutSection({
       <div className="mx-auto max-w-[1440px] px-[clamp(1rem,7vw,100px)]">
         {/* Callout panel */}
         <div
-          className="flex flex-col items-start gap-10 px-[clamp(1.5rem,7vw,100px)] py-10 my-4"
+          className="my-4"
           style={{ backgroundColor: finalBackgroundColor || "#F9E7C7" }}
         >
-          <SectionHeading
-            size="compact"
-            eyebrow={eyebrow ?? ""}
-            title={title ?? ""}
-            description={description ?? ""}
-          />
-          <div className="flex flex-col gap-2">
-            <Button className="w-full sm:w-auto">{finalButtonText || "Contact Us"}</Button>
-            {phoneNumber && (
-              <p className="text-[24px] mt-4 font-semibold leading-[17px] text-[#111110]">
-                {phoneNumber}
-              </p>
-            )}
-          </div>
+          <RevealGroup className="flex flex-col items-start gap-10 px-[clamp(1.5rem,7vw,100px)] py-10">
+            <RevealItem>
+              <SectionHeading
+                size="compact"
+                eyebrow={eyebrow ?? ""}
+                title={title ?? ""}
+                description={description ?? ""}
+              />
+            </RevealItem>
+            <RevealItem>
+              <div className="flex flex-col gap-2">
+                <Button className="w-full sm:w-auto">{finalButtonText || "Contact Us"}</Button>
+                {phoneNumber && (
+                  <p className="text-[24px] mt-4 font-semibold leading-[17px] text-[#111110]">
+                    {phoneNumber}
+                  </p>
+                )}
+              </div>
+            </RevealItem>
+          </RevealGroup>
         </div>
       </div>
     </section>
   );
 }
-

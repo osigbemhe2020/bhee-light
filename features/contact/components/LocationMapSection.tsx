@@ -1,5 +1,6 @@
 import { MapPin } from "lucide-react";
 import { SectionHeading } from "@/components/shared/section-heading";
+import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 
 const MAPS_URL =
   "https://www.google.com/maps/search/?api=1&query=Guzape+Extension+Abuja+Nigeria";
@@ -7,9 +8,9 @@ const MAPS_URL =
 export function LocationMapSection() {
   return (
     <section className="w-full bg-[#F7F1E5]">
-      <div className="mx-auto flex max-w-[1440px] flex-col gap-8 px-[clamp(1rem,7vw,100px)] py-8 sm:gap-10 sm:py-12 xl:flex-row xl:items-center xl:gap-16">
+      <RevealGroup className="mx-auto flex max-w-[1440px] flex-col gap-8 px-[clamp(1rem,7vw,100px)] py-8 sm:gap-10 sm:py-12 xl:flex-row xl:items-center xl:gap-16">
         {/* Location copy */}
-        <div className="flex w-full shrink-0 flex-col items-start gap-8 sm:gap-12 xl:w-[400px]">
+        <RevealItem className="flex w-full shrink-0 flex-col items-start gap-8 sm:gap-12 xl:w-[400px]">
           <div className="flex flex-col gap-[22px]">
             <SectionHeading
               size="wide"
@@ -30,13 +31,14 @@ export function LocationMapSection() {
           >
             Open Google Maps
           </a>
-        </div>
+        </RevealItem>
 
         {/* Google Maps placeholder */}
+        <RevealItem className="relative h-[260px] w-full min-w-0 flex-1 overflow-hidden rounded-[22px] border border-[#D6CCBA] bg-[#DCE8DF] sm:h-[430px]">
         <div
           role="img"
           aria-label="Map placeholder showing Guzape Extension, Abuja"
-          className="relative h-[260px] w-full min-w-0 flex-1 overflow-hidden rounded-[22px] border border-[#D6CCBA] bg-[#DCE8DF] sm:h-[430px]"
+          className="absolute inset-0"
         >
           {/* Roads: drawn in a 776x430 space and cropped to fit */}
           <svg
@@ -69,7 +71,8 @@ export function LocationMapSection() {
             </span>
           </div>
         </div>
-      </div>
+          </RevealItem>
+        </RevealGroup>
     </section>
   );
 }

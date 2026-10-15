@@ -1,25 +1,15 @@
 import Image from "next/image";
+import * as motion from "framer-motion/client";
 import { Button } from "@/components/shared/button";
+import { getHeroDiamonds, heroDescription, type HeroDiamond } from "@/data/landing";
+import { stagger, lineUp, fadeUp, diamondIn, EASE } from "@/lib/motion";
 
-const IMG = "/images/landing/hero-image-main.jpg";
-const IMG_SIZE = 1024; // source image is 1024x1024; change if yours differs
 const VIEW_W = 1200;
 const VIEW_H = 1250;
 const CORNER_RATIO = 0.14; // corner roundness relative to each diamond's size
 
-/**
- * cx / cy / r  -> position and size of the diamond in the 1200x1250 space
- * crop         -> which square of the source image it shows (source px).
- *                 Smaller `size` = more zoomed in. x/y move the crop window.
- */
-const DIAMONDS = [
-  { id: "large", cx: 720, cy: 480, r: 480, crop: { x: 516, y: 6, size: 500 } }, // top-right photo
-  { id: "medium", cx: 225, cy: 747, r: 225, crop: { x: 6, y: 516, size: 500 } }, // bottom-left photo
-  { id: "small", cx: 478, cy: 1000, r: 225, crop: { x: 6, y: 6, size: 500 } }, // top-left photo
-];
-
 // Diamond with rounded corners: straight edges, quadratic curve at each tip.
-function roundedDiamond({ cx, cy, r }: { cx: number; cy: number; r: number }) {
+function roundedDiamond({ cx, cy, r }: HeroDiamond) {
   const d = (r * CORNER_RATIO) / Math.SQRT2;
   const [tx, ty] = [cx, cy - r]; // top
   const [rx, ry] = [cx + r, cy]; // right
@@ -38,42 +28,51 @@ function roundedDiamond({ cx, cy, r }: { cx: number; cy: number; r: number }) {
   ].join(" ");
 }
 
-function HeroDiamonds() {
+function HeroDiamonds({ diamonds }: { diamonds: HeroDiamond[] }) {
   return (
-    <svg
+    <motion.svg
       viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
       className="h-full w-full"
       role="img"
-      aria-label="Bhee Light staff assisting guests at an airport desk and an event"
+      aria-label={diamonds.map((diamond) => diamond.imageAlt).join(". ")}
+      variants={stagger(0.12, 0.2)}
+      initial="hidden"
+      animate="show"
     >
       <defs>
-        {DIAMONDS.map((d) => (
+        {diamonds.map((d) => (
           <clipPath key={d.id} id={`hero-diamond-${d.id}`}>
             <path d={roundedDiamond(d)} />
           </clipPath>
         ))}
       </defs>
 
-      {DIAMONDS.map((d) => (
-        <g key={d.id} clipPath={`url(#hero-diamond-${d.id})`}>
-          {/* Nested svg = the crop window: it shows only d.crop of the image */}
-          <svg
+      {diamonds.map((d) => (
+        <motion.g
+          key={d.id}
+          clipPath={`url(#hero-diamond-${d.id})`}
+          variants={diamondIn}
+          style={{ transformBox: "fill-box", transformOrigin: "center" }}
+        >
+          <image
+            href={d.imageSrc}
             x={d.cx - d.r}
             y={d.cy - d.r}
             width={d.r * 2}
             height={d.r * 2}
-            viewBox={`${d.crop.x} ${d.crop.y} ${d.crop.size} ${d.crop.size}`}
-          >
-            <image href={IMG} width={IMG_SIZE} height={IMG_SIZE} />
-          </svg>
-        </g>
+            preserveAspectRatio="xMidYMid slice"
+            aria-label={d.imageAlt}
+          />
+        </motion.g>
       ))}
-    </svg>
+    </motion.svg>
   );
 }
-export function HeroSection() {
+export async function HeroSection() {
+  const diamonds = await getHeroDiamonds();
+
   return (
-    <section className="relative w-full h-[calc(100svh-72px)] md:h-[calc(100svh-88px)] bg-background overflow-hidden">
+    <section className="relative h-auto min-h-[calc(100svh-72px)] w-full overflow-hidden bg-background md:min-h-0 md:h-[calc(100svh-88px)]">
       {/* Cream background shape (your path) */}
       <svg
         aria-hidden
@@ -97,34 +96,67 @@ export function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 h-full mx-auto max-w-[1440px] px-4 sm:px-6 md:px-8 lg:px-[clamp(1.5rem,7vw,100px)] flex items-start pt-10 sm:pt-12 md:pt-[clamp(3rem,8vh,6rem)]">
-        <div className="flex flex-col gap-8 lg:gap-[clamp(1.5rem,5vh,3.5rem)] max-w-[760px] w-full py-6 md:py-0">
-          <div className="flex flex-col gap-2">
+      <div className="relative z-10 mx-auto flex min-h-[calc(100svh-72px)] w-full max-w-[1440px] items-start px-4 pt-10 sm:px-6 sm:pt-12 md:px-8 md:min-h-0 md:pt-[clamp(3rem,8vh,6rem)] lg:px-[clamp(1.5rem,7vw,100px)]">
+        <motion.div
+          className="flex w-full max-w-[760px] flex-col gap-8 py-6 lg:gap-[clamp(1.5rem,5vh,3.5rem)] md:py-0"
+          variants={stagger(0.09)}
+          initial="hidden"
+          animate="show"
+        >
+          <motion.div className="flex flex-col gap-2" variants={stagger(0.09)}>
             <h1 className="text-[length:clamp(2rem,min(5vw,7vh),3.75rem)] font-semibold leading-[1.2] text-foreground">
-              <span className="block">Professional Event Support.</span>
-              <span className="block">
-                <span className="text-[#C9870A]">Quality</span> Refreshments.
+              <span className="block overflow-hidden pb-1">
+                <motion.span className="block" variants={lineUp}>
+                  Professional Event Support.
+                </motion.span>
               </span>
-              <span className="block">Meaningful Experiences.</span>
+              <span className="block overflow-hidden pb-1">
+                <motion.span className="block" variants={lineUp}>
+                  <span className="relative inline-block text-[#C9870A]">
+                    Quality
+                    <motion.span
+                      aria-hidden
+                      className="absolute left-0 -bottom-0.5 h-[3px] w-full origin-left rounded-full bg-[#C9870A]"
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ duration: 0.6, ease: EASE, delay: 0.8 }}
+                    />
+                  </span>{" "}
+                  Refreshments.
+                </motion.span>
+              </span>
+              <span className="block overflow-hidden pb-1">
+                <motion.span className="block" variants={lineUp}>
+                  Meaningful Experiences.
+                </motion.span>
+              </span>
             </h1>
-            <p className="text-[16px] leading-relaxed text-foreground max-w-[700px]">
-              Bhee Light Unique Global Ventures provides professional event staffing, hospitality support, travel and
-              tour services, business development solutions, and natural refreshments. We are committed to
-              professionalism, reliability, quality, and creating positive experiences for the people and organisations
-              we serve.
-            </p>
-          </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
-            <Button>Explore Our Services</Button>
-            <Button variant="outline">Contact Us</Button>
-          </div>
-        </div>
+            <motion.p
+              className="max-w-[700px] text-[16px] leading-relaxed text-foreground"
+              variants={fadeUp(16)}
+            >
+              {heroDescription.join(" ")}
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            className="flex flex-col gap-3 sm:flex-row sm:gap-6"
+            variants={stagger(0.08)}
+          >
+            <motion.div variants={fadeUp(12)}>
+              <Button>Explore Our Services</Button>
+            </motion.div>
+            <motion.div variants={fadeUp(12)}>
+              <Button variant="outline">Contact Us</Button>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </div>
 
       {/* One image, three diamond windows */}
       <div className="hidden lg:block absolute z-10 right-[3%] top-1/2 -translate-y-1/2 h-[92%] aspect-[1200/1250]">
-        <HeroDiamonds />
+        <HeroDiamonds diamonds={diamonds} />
       </div>
     </section>
   );

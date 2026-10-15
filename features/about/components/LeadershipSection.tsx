@@ -1,16 +1,22 @@
+import Image from "next/image";
 import { SectionHeading } from "@/components/shared/section-heading";
+import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 
 export function LeadershipSection() {
   return (
     <section className="w-full bg-[#E5F9ED]">
-      <div className="mx-auto flex max-w-[1440px] flex-col items-start gap-10 px-[clamp(1.5rem,7vw,100px)] py-14 lg:flex-row lg:gap-16">
+      <RevealGroup className="mx-auto flex max-w-[1440px] flex-col items-start gap-10 px-[clamp(1.5rem,7vw,100px)] py-14 lg:flex-row lg:gap-16">
         {/* Founder portrait */}
-        <div className="flex w-full max-w-[500px] shrink-0 flex-col gap-[18px] lg:w-[500px]">
-          {/* Placeholder until a real photo exists */}
-          <div
-            aria-hidden
-            className="aspect-[500/395] w-full rounded-[20px] bg-[#D4D0C9]"
-          />
+        <RevealItem className="flex w-full max-w-[500px] shrink-0 flex-col gap-[18px] lg:w-[500px]">
+          <div className="relative aspect-[500/395] w-full overflow-hidden rounded-[20px]">
+            <Image
+              src="/images/CEO-image.PNG"
+              alt="Bhee Light founder Blessing Chikaodi"
+              fill
+              sizes="(min-width: 1024px) 500px, 100vw"
+              className="object-cover object-top"
+            />
+          </div>
 
           {/* Role card */}
           <div className="flex flex-col gap-2 rounded-[10px] bg-[#F9E7C7] p-[22px]">
@@ -21,10 +27,10 @@ export function LeadershipSection() {
               Entrepreneur | Travel Consultant | Tour Guide | Business Development Professional
             </p>
           </div>
-        </div>
+        </RevealItem>
 
         {/* Profile copy */}
-        <div className="flex w-full flex-1 flex-col gap-[22px]">
+        <RevealItem className="flex w-full flex-1 flex-col gap-[22px]">
           <SectionHeading
             eyebrow="Meet Blessing Chikaodi"
             title="The Person Behind the Business"
@@ -59,8 +65,8 @@ export function LeadershipSection() {
               discipline, confidence, and professionalism.
             </p>
           </div>
-        </div>
-      </div>
+          </RevealItem>
+          </RevealGroup>
     </section>
   );
 }

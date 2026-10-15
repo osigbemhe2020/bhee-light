@@ -2,37 +2,33 @@ import Image from "next/image";
 import { Check } from "lucide-react";
 import { Button } from "@/components/shared/button";
 import { SectionHeading } from "@/components/shared/section-heading";
+import { RevealGroup, RevealItem } from "@/components/shared/reveal";
+import { getUsheringIncluded, getUsheringValues } from "@/data/services";
 
-const INCLUDED = [
-  "Guest reception",
-  "Guest guidance",
-  "Event support",
-  "Professional guest management",
-  "Hospitality support",
-  "Professional presentation",
-];
+export async function UsheringServiceSection() {
+  const [included, values] = await Promise.all([
+    getUsheringIncluded(),
+    getUsheringValues(),
+  ]);
 
-const VALUES = ["Courtesy", "Discipline", "Confidence", "Good Presentation", "Professionalism"];
-
-export function UsheringServiceSection() {
   return (
     <section className="w-full bg-[#FFFCF6]">
-      <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-10 px-[clamp(1.5rem,7vw,100px)] py-14 lg:flex-row lg:gap-14">
+      <RevealGroup className="mx-auto flex max-w-[1440px] flex-col items-center gap-10 px-[clamp(1.5rem,7vw,100px)] py-14 lg:flex-row lg:gap-14">
         {/* Service imagery */}
-        <div className="w-full shrink-0 lg:w-[440px]">
+        <RevealItem className="w-full shrink-0 lg:w-[440px]">
           <div className="relative aspect-[520/610] w-full max-w-[440px] overflow-hidden rounded-[22px]">
             <Image
-              src="/images/services/service-image-1.jpg"
+              src="/images/bhee-light-img-5.jpeg"
               alt="Bhee Light ushers welcoming guests at a conference"
               fill
               sizes="(min-width: 1024px) 440px, 100vw"
               className="object-cover"
             />
           </div>
-        </div>
+        </RevealItem>
 
         {/* Service copy */}
-        <div className="flex w-full min-w-0 flex-1 flex-col items-start gap-14">
+        <RevealItem className="flex w-full min-w-0 flex-1 flex-col items-start gap-14">
           <div className="flex w-full flex-col gap-6">
             <SectionHeading
               size="wide"
@@ -47,7 +43,7 @@ export function UsheringServiceSection() {
 
             {/* Included services */}
             <ul className="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
-              {INCLUDED.map((item) => (
+              {included.map((item) => (
                 <li key={item} className="flex items-center gap-[10px]">
                   <span className="flex size-[26px] shrink-0 items-center justify-center rounded-full bg-[#F9E7C7]">
                     <Check aria-hidden size={14} strokeWidth={2} className="text-[#C9870A]" />
@@ -61,7 +57,7 @@ export function UsheringServiceSection() {
 
             {/* Core values: one line from lg up, wraps on small screens */}
             <ul className="flex flex-wrap justify-between gap-x-4 gap-y-2 rounded-xl bg-[#F7F1E5] px-[18px] py-[14px] xl:flex-nowrap">
-              {VALUES.map((value) => (
+              {values.map((value) => (
                 <li key={value} className="whitespace-nowrap text-[14px] font-semibold leading-[17px] text-[#111110]">
                   {value}
                 </li>
@@ -70,8 +66,8 @@ export function UsheringServiceSection() {
           </div>
 
           <Button>Enquire About Ushering</Button>
-        </div>
-      </div>
+        </RevealItem>
+      </RevealGroup>
     </section>
   );
 }

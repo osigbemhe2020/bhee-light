@@ -1,12 +1,5 @@
 import { z } from "zod";
-
-const SERVICES = [
-  "ushering",
-  "refreshments",
-  "travel",
-  "business",
-  "general",
-] as const;
+import { ENQUIRY_SERVICE_VALUES } from "@/data/services";
 
 export const enquirySchema = z.object({
   fullName: z
@@ -22,7 +15,7 @@ export const enquirySchema = z.object({
     .string()
     .min(1, "Email is required")
     .email("Invalid email address"),
-  service: z.enum(SERVICES, {
+  service: z.enum(ENQUIRY_SERVICE_VALUES, {
     message: "Please select a service",
   }),
   eventDate: z.string().optional(),

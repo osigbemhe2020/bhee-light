@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { Button } from "@/components/shared/button";
 import { SectionHeading } from "@/components/shared/section-heading";
+import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 
 export function RefreshmentsServiceSection() {
   return (
     <section className="w-full bg-lighter-orange-2 px-4 py-10 sm:px-6 md:px-8 md:py-14 lg:px-[100px]">
-      <div className="mx-auto flex max-w-[1440px] flex-col gap-8 lg:flex-row lg:items-center lg:gap-[72px]">
-        <div className="flex min-w-0 flex-1 flex-col gap-8 lg:gap-14">
+      <RevealGroup className="mx-auto flex max-w-[1440px] flex-col gap-8 lg:flex-row lg:items-center lg:gap-[72px]">
+        <RevealItem className="flex min-w-0 flex-1 flex-col gap-8 lg:gap-14">
           <div className="flex flex-col gap-4">
             <SectionHeading
               eyebrow="Refreshments Service"
@@ -30,20 +31,20 @@ export function RefreshmentsServiceSection() {
           </div>
 
           <Button>Order Refreshments</Button>
-        </div>
+        </RevealItem>
 
-        <div className="w-full max-w-[560px] self-center rounded-[22px] bg-background p-3.5 shadow-lg -rotate-1 lg:shrink-0">
+        <RevealItem className="w-full max-w-[560px] self-center rounded-[22px] bg-background p-3.5 shadow-lg -rotate-1 lg:shrink-0">
           <div className="relative aspect-[532/452] w-full overflow-hidden rounded-[12px] -rotate-1">
             <Image
-              src="/images/services/service-image-3.jpg"
+              src="/images/bhee-light-img-2.jpeg"
               alt="Refreshments"
               fill
               sizes="(min-width: 1024px) 532px, 90vw"
               className="object-cover"
             />
           </div>
-        </div>
-      </div>
+          </RevealItem>
+        </RevealGroup>
     </section>
   );
 }

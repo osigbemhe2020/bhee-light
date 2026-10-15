@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { Quote } from "lucide-react";
 import { SectionHeading } from "@/components/shared/section-heading";
+import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 
 export function OurStorySection() {
   return (
     <section className="w-full bg-[#FFFCF6]">
-      <div className="mx-auto flex min-h-[600px] max-w-[1440px]  flex-col items-center gap-8 px-[clamp(1.5rem,5vw,100px)] py-10 lg:flex-row lg:gap-[72px]">
-        {/* Story copy */}
-        <div className="flex w-full  flex-1 flex-col items-start gap-6">
+      <RevealGroup className="mx-auto flex min-h-[600px] max-w-[1440px] flex-col items-center gap-8 px-[clamp(1.5rem,5vw,100px)] py-10 lg:flex-row lg:gap-[72px]">
+        <RevealItem className="flex w-full flex-1 flex-col items-start gap-6">
           <SectionHeading
             eyebrow="OUR STORY"
             title="Service, Enterprise And Continuous Growth."
@@ -38,14 +38,14 @@ export function OurStorySection() {
               &ldquo;To deliver quality, create positive experiences, and provide genuine value.&rdquo;
             </blockquote>
           </figure>
-        </div>
+        </RevealItem>
 
         {/* Story images: 520 box, everything inside is a percentage so it scales */}
-        <div className="relative aspect-square w-full max-w-[520px] shrink-0 lg:w-[520px]">
+        <RevealItem className="relative aspect-square w-full max-w-[520px] shrink-0 lg:w-[520px]">
           {/* Main image: 430 / 520 */}
           <div className="absolute left-0 top-0 h-[82.7%] w-[82.7%] overflow-hidden rounded-[22px]">
             <Image
-              src="/images/about/our-story-detail.jpg"
+              src="/images/bhee-light-img-4.jpeg"
               alt="Bhee Light usher greeting guests at an event"
               fill
               sizes="(min-width: 1024px) 430px, 80vw"
@@ -56,15 +56,15 @@ export function OurStorySection() {
           {/* Detail image: 250x230, cream border cuts into the main image */}
           <div className="absolute bottom-0 right-0 z-10 h-[44.2%] w-[48.1%] overflow-hidden rounded-[22px] border-[10px] border-[#FFFCF6]">
             <Image
-              src="/images/about/our-story-main.jpg"
+              src="/images/bhee-light-img-1.jpeg"
               alt="Naturally made Nigerian fruit drinks"
               fill
               sizes="(min-width: 1024px) 250px, 45vw"
               className="object-cover"
             />
           </div>
-        </div>
-      </div>
+          </RevealItem>
+          </RevealGroup>
     </section>
   );
 }

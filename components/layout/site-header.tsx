@@ -5,19 +5,15 @@ import Link from "next/link";
 import { Button } from "@/components/shared/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import type { NavigationItem } from "@/data/navigation";
 
 interface SiteHeaderProps {
   activePage?: "home" | "about" | "services" | "contact";
+  navItems: NavigationItem[];
 }
 
-export function SiteHeader({ activePage = "home" }: SiteHeaderProps) {
+export function SiteHeader({ activePage = "home", navItems }: SiteHeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const navItems = [
-    { href: "/", label: "Home", key: "home" },
-    { href: "/about", label: "About Us", key: "about" },
-    { href: "/services", label: "Services", key: "services" },
-    { href: "/contact", label: "Contact Us", key: "contact" },
-  ] as const;
 
   return (
     <header className="fixed top-0 left-0 right-0 h-[72px] md:h-[88px] bg-background border-b border-gray z-50">
