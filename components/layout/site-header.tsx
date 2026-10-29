@@ -47,7 +47,10 @@ export function SiteHeader({ activePage = "home", navItems }: SiteHeaderProps) {
         </nav>
 
         <div className="hidden lg:block">
-          <Button>Start an Inquiry</Button>
+          
+          <a href="/contact">
+            <Button>Start an Inquiry</Button>
+          </a>
         </div>
 
         <button

@@ -41,7 +41,9 @@ export function EnquiryCalloutSection({
             </RevealItem>
             <RevealItem>
               <div className="flex flex-col gap-2">
-                <Button className="w-full sm:w-auto">{finalButtonText || "Contact Us"}</Button>
+                <a href="/contact">
+                  <Button className="w-full sm:w-auto">{finalButtonText || "Contact Us"}</Button>
+                </a>
                 {phoneNumber && (
                   <p className="text-[24px] mt-4 font-semibold leading-[17px] text-[#111110]">
                     {phoneNumber}

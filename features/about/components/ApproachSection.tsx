@@ -72,7 +72,9 @@ export async function ApproachSection() {
               </p>
             </div>
 
-            <Button>See Our Services</Button>
+            <a href="/services">
+              <Button>See Our Services</Button>
+            </a>
           </div>
           </Reveal>
         </div>

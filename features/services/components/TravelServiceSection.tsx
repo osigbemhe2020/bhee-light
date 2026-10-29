@@ -5,11 +5,11 @@ import { SectionHeading } from "@/components/shared/section-heading";
 import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 import { getTravelPillars } from "@/data/services";
 
-export async function TravelServiceSection() {
+export async function TravelServiceSection({ id }: { id: string }) {
   const pillars = await getTravelPillars();
 
   return (
-    <section className="w-full bg-[#E5F9ED]">
+    <section id={id} className="w-full bg-[#E5F9ED]">
       <RevealGroup className="mx-auto flex max-w-[1440px] flex-col items-center gap-10 px-[clamp(1.5rem,7vw,100px)] py-14 lg:flex-row lg:gap-[72px]">
         {/* Service imagery: framed photo, tilted */}
         <RevealItem className="w-full max-w-[560px] shrink-0 rotate-1 rounded-[22px] bg-[#FFFCF6] p-3 lg:w-[560px]">
@@ -55,7 +55,9 @@ export async function TravelServiceSection() {
             </ul>
           </div>
 
-          <Button>Enquire About Travel Services</Button>
+          <a href="/contact">
+            <Button>Enquire About Travel Services</Button>
+          </a>
         </RevealItem>
       </RevealGroup>
     </section>

@@ -13,6 +13,7 @@ export type LandingService = {
   icon: "bell" | "plane" | "cupSoda" | "handshake";
   title: string;
   description: string;
+  href: string;
 };
 
 export type PurposeCard = {
@@ -76,6 +77,7 @@ const landingServices: LandingService[] = [
     title: "Event Staffing & Hospitality",
     description:
       "Professional ushers, hosts, and hospitality staff for corporate events, weddings, and special occasions.",
+    href: "/services#ushering",
   },
   {
     imageSrc: "/images/bhee-light-img-5.jpeg",
@@ -83,6 +85,7 @@ const landingServices: LandingService[] = [
     icon: "plane",
     title: "Travel & Tour Services",
     description: "Curated travel experiences and tour packages for individuals and groups exploring Nigeria.",
+    href: "/services#travel",
   },
   {
     imageSrc: "/images/bhee-light-img-3.jpeg",
@@ -90,6 +93,7 @@ const landingServices: LandingService[] = [
     icon: "cupSoda",
     title: "Natural Refreshments",
     description: "Premium naturally made Nigerian fruit and hibiscus beverages for events and catering.",
+    href: "/services#refreshments",
   },
   {
     imageSrc: "/images/bhee-light-img-6.jpeg",
@@ -97,6 +101,7 @@ const landingServices: LandingService[] = [
     icon: "handshake",
     title: "Business Development",
     description: "Strategic partnerships and growth solutions for businesses looking to expand.",
+    href: "/services#business-development",
   },
 ];
 

@@ -2,6 +2,7 @@ import { SectionHeading } from "@/components/shared/section-heading";
 import { Button } from "@/components/shared/button";
 import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 import { aboutDescription } from "@/data/about";
+import Link from "next/link";
 
 export function AboutSection() {
   return (
@@ -20,7 +21,9 @@ export function AboutSection() {
             </div>
           </RevealItem>
           <RevealItem>
-            <Button>Read Our Story</Button>
+            <Link href="/about">
+              <Button>Read Our Story</Button>
+            </Link>
           </RevealItem>
         </div>
       </RevealGroup>

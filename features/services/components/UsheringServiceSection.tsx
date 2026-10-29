@@ -5,14 +5,14 @@ import { SectionHeading } from "@/components/shared/section-heading";
 import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 import { getUsheringIncluded, getUsheringValues } from "@/data/services";
 
-export async function UsheringServiceSection() {
+export async function UsheringServiceSection({ id }: { id: string }) {
   const [included, values] = await Promise.all([
     getUsheringIncluded(),
     getUsheringValues(),
   ]);
 
   return (
-    <section className="w-full bg-[#FFFCF6]">
+    <section id={id} className="w-full bg-[#FFFCF6]">
       <RevealGroup className="mx-auto flex max-w-[1440px] flex-col items-center gap-10 px-[clamp(1.5rem,7vw,100px)] py-14 lg:flex-row lg:gap-14">
         {/* Service imagery */}
         <RevealItem className="w-full shrink-0 lg:w-[440px]">
@@ -65,7 +65,9 @@ export async function UsheringServiceSection() {
             </ul>
           </div>
 
-          <Button>Enquire About Ushering</Button>
+          <a href="/contact">
+            <Button>Enquire About Ushering</Button>
+          </a>
         </RevealItem>
       </RevealGroup>
     </section>

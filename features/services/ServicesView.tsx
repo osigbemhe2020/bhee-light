@@ -21,10 +21,10 @@ export async function ServicesView() {
           title="Professional Services Designed Around Your Needs"
           description="We provide a range of services across events, hospitality, travel, business development, and natural refreshments."
         />
-        <UsheringServiceSection />
-        <RefreshmentsServiceSection />
-        <TravelServiceSection />
-        <BusinessServiceSection />
+        <UsheringServiceSection id="ushering" />
+        <RefreshmentsServiceSection id="refreshments" />
+        <TravelServiceSection id="travel" />
+        <BusinessServiceSection id="business" />
         <EnquiryCalloutSection
           eyebrow="WE ARE ALWAYS AVAILABLE FOR YOU"
           title="Which Service Can We Help You With ?"

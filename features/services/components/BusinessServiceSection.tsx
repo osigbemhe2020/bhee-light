@@ -5,11 +5,11 @@ import { SectionHeading } from "@/components/shared/section-heading";
 import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 import { getBusinessCapabilities } from "@/data/services";
 
-export async function BusinessServiceSection() {
+export async function BusinessServiceSection({ id }: { id: string }) {
   const capabilities = await getBusinessCapabilities();
 
   return (
-    <section className="w-full bg-[#FFFCF6]">
+    <section id={id} className="w-full bg-[#FFFCF6]">
       <RevealGroup className="mx-auto flex max-w-[1440px] flex-col items-center gap-10 px-[clamp(1.5rem,7vw,100px)] py-10 lg:flex-row lg:gap-[72px]">
         {/* Service copy */}
         <RevealItem className="flex w-full min-w-0 flex-1 flex-col items-start gap-12">
@@ -41,7 +41,9 @@ export async function BusinessServiceSection() {
             </ul>
           </div>
 
-          <Button>Work With Us</Button>
+          <a href="/contact">
+            <Button>Work With Us</Button>
+          </a>
         </RevealItem>
 
         {/* Service imagery: everything inside is a percentage of the 560 box */}

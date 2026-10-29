@@ -1,8 +1,8 @@
 import Image from "next/image";
 import * as motion from "framer-motion/client";
-import { Button } from "@/components/shared/button";
 import { getHeroDiamonds, heroDescription, type HeroDiamond } from "@/data/landing";
 import { stagger, lineUp, fadeUp, diamondIn, EASE } from "@/lib/motion";
+import { HeroActions } from "./hero-actions";
 
 const VIEW_W = 1200;
 const VIEW_H = 1250;
@@ -68,6 +68,7 @@ function HeroDiamonds({ diamonds }: { diamonds: HeroDiamond[] }) {
     </motion.svg>
   );
 }
+
 export async function HeroSection() {
   const diamonds = await getHeroDiamonds();
 
@@ -90,6 +91,7 @@ export async function HeroSection() {
           src="/images/landing/Travel.png"
           alt=""
           fill
+          priority
           sizes="524px"
           className="object-cover"
         />
@@ -140,17 +142,7 @@ export async function HeroSection() {
             </motion.p>
           </motion.div>
 
-          <motion.div
-            className="flex flex-col gap-3 sm:flex-row sm:gap-6"
-            variants={stagger(0.08)}
-          >
-            <motion.div variants={fadeUp(12)}>
-              <Button>Explore Our Services</Button>
-            </motion.div>
-            <motion.div variants={fadeUp(12)}>
-              <Button variant="outline">Contact Us</Button>
-            </motion.div>
-          </motion.div>
+          <HeroActions />
         </motion.div>
       </div>
 

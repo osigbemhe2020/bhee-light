@@ -3,9 +3,9 @@ import { Button } from "@/components/shared/button";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 
-export function RefreshmentsServiceSection() {
+export function RefreshmentsServiceSection({ id }: { id: string }) {
   return (
-    <section className="w-full bg-lighter-orange-2 px-4 py-10 sm:px-6 md:px-8 md:py-14 lg:px-[100px]">
+    <section id={id} className="w-full bg-lighter-orange-2 px-4 py-10 sm:px-6 md:px-8 md:py-14 lg:px-[100px]">
       <RevealGroup className="mx-auto flex max-w-[1440px] flex-col gap-8 lg:flex-row lg:items-center lg:gap-[72px]">
         <RevealItem className="flex min-w-0 flex-1 flex-col gap-8 lg:gap-14">
           <div className="flex flex-col gap-4">
@@ -30,7 +30,9 @@ export function RefreshmentsServiceSection() {
             </p>
           </div>
 
-          <Button>Order Refreshments</Button>
+          <a href="/contact">
+            <Button>Order Refreshments</Button>
+          </a>
         </RevealItem>
 
         <RevealItem className="w-full max-w-[560px] self-center rounded-[22px] bg-background p-3.5 shadow-lg -rotate-1 lg:shrink-0">

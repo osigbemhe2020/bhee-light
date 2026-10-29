@@ -56,10 +56,10 @@ export function SiteFooter() {
         <div className="flex min-w-0 flex-col gap-3.5">
           <h3 className="text-sm font-semibold text-foreground">Services</h3>
           <div className="flex flex-col gap-3.5">
-            <Link href="/services#event-staffing" className="text-xs text-foreground hover:text-green transition-colors">Event Ushering & Guest Management</Link>
-            <Link href="/services#travel-tours" className="text-xs text-foreground hover:text-green transition-colors">Travel Planning & Tour Services</Link>
+            <Link href="/services#ushering" className="text-xs text-foreground hover:text-green transition-colors">Event Ushering & Guest Management</Link>
+            <Link href="/services#travel" className="text-xs text-foreground hover:text-green transition-colors">Travel Planning & Tour Services</Link>
             <Link href="/services#refreshments" className="text-xs text-foreground hover:text-green transition-colors">Natural Refreshments</Link>
-            <Link href="/services#business-dev" className="text-xs text-foreground hover:text-green transition-colors">Business Development and Marketing</Link>
+            <Link href="/services#business" className="text-xs text-foreground hover:text-green transition-colors">Business Development and Marketing</Link>
           </div>
         </div>
 
