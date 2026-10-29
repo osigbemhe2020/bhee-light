@@ -2,14 +2,9 @@
 
 import { enquirySchema, type EnquiryFormData } from "../schemas/enquiry.schema";
 import { sendMailgunEmail } from "@/lib/api/mailgun";
+import { enquiryServiceOptions } from "@/data/services";
 
-const SERVICE_LABELS: Record<string, string> = {
-  ushering: "Event Ushering & Guest Management",
-  refreshments: "Natural Refreshments",
-  travel: "Travel Planning & Tour Services",
-  business: "Business Development & Marketing",
-  general: "General Enquiry",
-};
+const SERVICE_LABELS = Object.fromEntries(enquiryServiceOptions.map(({ value, label }) => [value, label]));
 
 export async function submitEnquiry(data: EnquiryFormData) {
   // Validate the data

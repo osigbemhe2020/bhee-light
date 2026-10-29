@@ -3,26 +3,25 @@ import { Handshake } from "lucide-react";
 import { Button } from "@/components/shared/button";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { RevealGroup, RevealItem } from "@/components/shared/reveal";
-import { getBusinessCapabilities } from "@/data/services";
+import { servicesContent } from "@/data/services";
 
-export async function BusinessServiceSection({ id }: { id: string }) {
-  const capabilities = await getBusinessCapabilities();
+export function BusinessServiceSection() {
+  const content = servicesContent.business;
+  const { capabilities } = content;
 
   return (
-    <section id={id} className="w-full bg-[#FFFCF6]">
+    <section id={content.id} className="w-full bg-[#FFFCF6]">
       <RevealGroup className="mx-auto flex max-w-[1440px] flex-col items-center gap-10 px-[clamp(1.5rem,7vw,100px)] py-10 lg:flex-row lg:gap-[72px]">
         {/* Service copy */}
         <RevealItem className="flex w-full min-w-0 flex-1 flex-col items-start gap-12">
           <div className="flex w-full flex-col gap-6">
             <SectionHeading
-              eyebrow="Business Development & Marketing"
-              title="Building Relationships. Creating Opportunities."
+              eyebrow={content.eyebrow}
+              title={content.title}
             />
 
             <p className="text-[18px] leading-[22px] text-[#625F56]">
-              We bring experience across business development, marketing, client relations, sales, networking, and
-              partnerships. Our focus is on building valuable relationships, identifying opportunities, and creating
-              meaningful connections that can support business growth and collaboration.
+              {content.description}
             </p>
 
             {/* Capabilities */}
@@ -42,7 +41,7 @@ export async function BusinessServiceSection({ id }: { id: string }) {
           </div>
 
           <a href="/contact">
-            <Button>Work With Us</Button>
+            <Button>{content.button}</Button>
           </a>
         </RevealItem>
 
@@ -51,8 +50,8 @@ export async function BusinessServiceSection({ id }: { id: string }) {
           {/* Main image: 510 / 560 */}
           <div className="absolute left-0 top-0 h-[91%] w-[91%] overflow-hidden rounded-[22px]">
             <Image
-              src="/images/bhee-light-img-6.jpeg"
-              alt="Business professionals in a development meeting at a modern office"
+              src={content.image.src}
+              alt={content.image.alt}
               fill
               sizes="(min-width: 1024px) 510px, 90vw"
               className="object-cover"
@@ -63,7 +62,7 @@ export async function BusinessServiceSection({ id }: { id: string }) {
           <div className="absolute bottom-0 right-0 z-10 flex min-h-[20%] w-[46.4%] min-w-[200px] items-center gap-3 rounded-xl border-8 border-[#FFFCF6] bg-[#E8CF98] p-5">
             <Handshake aria-hidden size={28} strokeWidth={1.6} className="shrink-0 text-[#123D32]" />
             <p className="text-[20px] font-semibold leading-[24px] text-[#092A22]">
-              Meaningful professional connections
+              {content.connection}
             </p>
           </div>
           </RevealItem>

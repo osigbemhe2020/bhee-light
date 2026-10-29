@@ -7,6 +7,7 @@ import { RefreshmentsServiceSection } from "./components/RefreshmentsServiceSect
 import { TravelServiceSection } from "./components/TravelServiceSection";
 import { BusinessServiceSection } from "./components/BusinessServiceSection";
 import { getNavigationItems } from "@/data/navigation";
+import { servicesContent } from "@/data/services";
 
 export async function ServicesView() {
   const navItems = await getNavigationItems();
@@ -17,18 +18,16 @@ export async function ServicesView() {
 
       <main className="flex-1 pt-[72px] md:pt-[88px]">
         <PageHero
-          eyebrow="OUR SERVICES"
-          title="Professional Services Designed Around Your Needs"
-          description="We provide a range of services across events, hospitality, travel, business development, and natural refreshments."
+          {...servicesContent.hero}
         />
-        <UsheringServiceSection id="ushering" />
-        <RefreshmentsServiceSection id="refreshments" />
-        <TravelServiceSection id="travel" />
-        <BusinessServiceSection id="business" />
+        <UsheringServiceSection />
+        <RefreshmentsServiceSection />
+        <TravelServiceSection />
+        <BusinessServiceSection />
         <EnquiryCalloutSection
-          eyebrow="WE ARE ALWAYS AVAILABLE FOR YOU"
-          title="Which Service Can We Help You With ?"
-          description="Share your requirements and we’ll help you take the next step with clarity, professionalism, and care."
+          eyebrow={servicesContent.callout.eyebrow}
+          title={servicesContent.callout.title}
+          description={servicesContent.callout.description}
         />
       </main>
 

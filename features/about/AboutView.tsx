@@ -6,6 +6,7 @@ import { LeadershipSection } from "./components/LeadershipSection";
 import { EducationSection } from "./components/EducationSection";
 import { ApproachSection } from "./components/ApproachSection";
 import { getNavigationItems } from "@/data/navigation";
+import { aboutContent } from "@/data/about";
 
 
 export async function AboutView() {
@@ -17,9 +18,7 @@ export async function AboutView() {
 
       <main className="flex-1 pt-[72px] md:pt-[88px]">
         <PageHero
-          eyebrow="ABOUT US"
-          title="Building Experiences Through Service"
-          description="A people-centred Nigerian business bringing together hospitality, travel, entrepreneurship, and a commitment to genuine value."
+          {...aboutContent.hero}
         />
         <OurStorySection />
         <LeadershipSection />

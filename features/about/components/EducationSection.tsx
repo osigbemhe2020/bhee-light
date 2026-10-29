@@ -1,8 +1,10 @@
 import { GraduationCap } from "lucide-react";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { RevealGroup, RevealItem } from "@/components/shared/reveal";
+import { aboutContent } from "@/data/about";
 
 export function EducationSection() {
+  const content = aboutContent.education;
   return (
     <section className="w-full bg-[#F7F1E5]">
       <RevealGroup className="mx-auto flex min-h-[459px] max-w-[1440px] flex-col items-center gap-10 px-[clamp(1.5rem,7vw,100px)] py-10 lg:flex-row lg:gap-16">
@@ -19,18 +21,18 @@ export function EducationSection() {
               />
             </div>
             <p className="text-[16px] font-semibold leading-[19px] text-[#C9870A]">
-              2019 — 2024
+              {content.period}
             </p>
           </div>
 
           <h3 className="text-[length:clamp(1.5rem,2.2vw,2rem)] font-semibold leading-[1.19] text-[#092A22]">
-            University of Calabar, Calabar
+            {content.institution}
           </h3>
 
           <hr className="h-px border-0 bg-[#D4D0C9]" />
 
           <p className="text-[18px] leading-[22px] text-[#111110]">
-            Background in Biology Education &bull; Teachers Registration Council of Nigeria (TRCN) certificate
+            {content.qualification}
           </p>
           </article>
         </RevealItem>
@@ -38,20 +40,12 @@ export function EducationSection() {
         {/* Education copy */}
         <RevealItem className="flex w-full flex-1 flex-col gap-6">
           <SectionHeading
-            eyebrow="Education & Professional Development"
-            title="Learning, Growing and Becoming Better"
+            eyebrow={content.eyebrow}
+            title={content.title}
           />
 
           <div className="flex flex-col gap-6 text-[18px] leading-[22px] text-[#625F56]">
-            <p>
-              Blessing studied at the University of Calabar, Calabar, from 2019 to 2024, with a background in Biology
-              Education. She holds a Teachers Registration Council of Nigeria (TRCN) certificate and has pursued
-              additional certifications across different fields.
-            </p>
-            <p>
-              Her commitment to continuous learning reflects her belief in personal development, adaptability, and
-              professional growth.
-            </p>
+            {content.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>
           </RevealItem>
           </RevealGroup>

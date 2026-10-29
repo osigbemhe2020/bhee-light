@@ -1,28 +1,31 @@
 import { z } from "zod";
 import { ENQUIRY_SERVICE_VALUES } from "@/data/services";
+import { contactContent } from "@/data/contact";
+
+const validation = contactContent.enquiry.validation;
 
 export const enquirySchema = z.object({
   fullName: z
     .string()
-    .min(2, "Full name must be at least 2 characters")
-    .max(100, "Full name must be less than 100 characters"),
+    .min(2, validation.fullNameMin)
+    .max(100, validation.fullNameMax),
   phoneNumber: z
     .string()
-    .min(10, "Phone number must be at least 10 characters")
-    .max(20, "Phone number must be less than 20 characters")
-    .regex(/^[+]?[\d\s-()]+$/, "Invalid phone number format"),
+    .min(10, validation.phoneMin)
+    .max(20, validation.phoneMax)
+    .regex(/^[+]?[\d\s-()]+$/, validation.phoneFormat),
   email: z
     .string()
-    .min(1, "Email is required")
-    .email("Invalid email address"),
+    .min(1, validation.emailRequired)
+    .email(validation.emailFormat),
   service: z.enum(ENQUIRY_SERVICE_VALUES, {
-    message: "Please select a service",
+    message: validation.serviceRequired,
   }),
   eventDate: z.string().optional(),
   message: z
     .string()
-    .min(10, "Message must be at least 10 characters")
-    .max(2000, "Message must be less than 2000 characters"),
+    .min(10, validation.messageMin)
+    .max(2000, validation.messageMax),
 });
 
 export type EnquiryFormData = z.infer<typeof enquirySchema>;

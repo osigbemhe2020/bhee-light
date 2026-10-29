@@ -11,6 +11,7 @@ import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 import { enquirySchema, type EnquiryFormData } from "../schemas/enquiry.schema";
 import { submitEnquiry } from "../services/submit-enquiry";
 import type { EnquiryServiceOption } from "@/data/services";
+import { contactContent } from "@/data/contact";
 
 const labelClass = "text-[14px] font-semibold leading-[17px] text-[#111110]";
 const inputClass =
@@ -44,6 +45,8 @@ export function EnquiryFormSection({
 }: {
   serviceOptions: EnquiryServiceOption[];
 }) {
+  const content = contactContent.enquiry;
+  const fields = content.fields;
   const [dateFocused, setDateFocused] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -80,7 +83,7 @@ export function EnquiryFormSection({
       setSubmitSuccess(true);
     } catch (error) {
       setSubmitError(
-        error instanceof Error ? error.message : "Failed to submit enquiry"
+        error instanceof Error ? error.message : content.submitErrorFallback
       );
     } finally {
       setIsSubmitting(false);
@@ -93,16 +96,16 @@ export function EnquiryFormSection({
         {/* Enquiry introduction */}
         <RevealItem className="flex w-full shrink-0 flex-col gap-6 sm:gap-7 xl:w-[430px]">
           <div className="flex flex-col gap-4">
-            <SectionHeading size="wide" eyebrow="Enquiry Form" title="Send Us an Enquiry" />
+            <SectionHeading size="wide" eyebrow={content.eyebrow} title={content.title} />
             <p className="text-[16px] leading-[19px] text-[#625F56]">
-              Tell us what you need and our team will get back to you.
+              {content.description}
             </p>
           </div>
 
           <div className="relative aspect-[430/380] w-full overflow-hidden rounded-[22px]">
             <Image
-              src="/images/contact/contact-us-img.jpg"
-              alt="Bhee Light client services professional answering an enquiry"
+              src={content.image.src}
+              alt={content.image.alt}
               fill
               sizes="(min-width: 1024px) 430px, 100vw"
               className="object-cover"
@@ -113,8 +116,7 @@ export function EnquiryFormSection({
           <div className="flex items-start gap-3 rounded-xl bg-[#DCE8DF] p-4 sm:items-center sm:gap-[14px] sm:p-5">
             <ShieldCheck aria-hidden size={24} strokeWidth={1.7} className="shrink-0 text-[#123D32]" />
             <p className="text-[14px] leading-[17px] text-[#111110]">
-              Share only the details relevant to your enquiry. We&apos;ll use them to understand your requirements and
-              respond.
+              {content.privacyNote}
             </p>
           </div>
         </RevealItem>
@@ -125,10 +127,10 @@ export function EnquiryFormSection({
             <ShieldCheck size={64} strokeWidth={1.5} className="text-[#0D733A]" />
             <div className="text-center">
               <h3 className="text-[20px] font-semibold leading-[24px] text-[#092A22]">
-                Enquiry Submitted Successfully
+                {content.successTitle}
               </h3>
               <p className="mt-2 text-[14px] leading-[17px] text-[#625F56]">
-                Thank you for your enquiry. Our team will get back to you shortly.
+                {content.successDescription}
               </p>
             </div>
             <Button
@@ -138,7 +140,7 @@ export function EnquiryFormSection({
                 reset();
               }}
             >
-              Submit Another Enquiry
+              {content.anotherEnquiry}
             </Button>
           </RevealItem>
         ) : (
@@ -156,40 +158,40 @@ export function EnquiryFormSection({
               <div className="flex flex-col gap-5 sm:flex-row sm:gap-[18px]">
                 <Field
                   id="fullName"
-                  label="Full Name"
+                  label={fields.fullName.label}
                   error={errors.fullName?.message}
                 >
                   <input
                     id="fullName"
                     type="text"
                     {...register("fullName")}
-                    placeholder="Enter your full name."
+                    placeholder={fields.fullName.placeholder}
                     className={inputClass}
                     aria-invalid={errors.fullName ? "true" : "false"}
                   />
                 </Field>
                 <Field
                   id="phoneNumber"
-                  label="Phone Number"
+                  label={fields.phoneNumber.label}
                   error={errors.phoneNumber?.message}
                 >
                   <input
                     id="phoneNumber"
                     type="tel"
                     {...register("phoneNumber")}
-                    placeholder="Enter your phone number."
+                    placeholder={fields.phoneNumber.placeholder}
                     className={inputClass}
                     aria-invalid={errors.phoneNumber ? "true" : "false"}
                   />
                 </Field>
               </div>
 
-              <Field id="email" label="Email Address" error={errors.email?.message}>
+              <Field id="email" label={fields.email.label} error={errors.email?.message}>
                 <input
                   id="email"
                   type="email"
                   {...register("email")}
-                  placeholder="Enter your email address."
+                  placeholder={fields.email.placeholder}
                   className={inputClass}
                   aria-invalid={errors.email ? "true" : "false"}
                 />
@@ -197,7 +199,7 @@ export function EnquiryFormSection({
 
               {/* Service selection */}
               <fieldset className="flex flex-col gap-2">
-                <legend className={`${labelClass} mb-2`}>Service Required</legend>
+                <legend className={`${labelClass} mb-2`}>{fields.service.label}</legend>
                 {errors.service && (
                   <span className="text-[12px] text-red-600">
                     {errors.service.message}
@@ -240,7 +242,7 @@ export function EnquiryFormSection({
                 </div>
               </fieldset>
 
-              <Field id="eventDate" label="Event / Service Date">
+              <Field id="eventDate" label={fields.eventDate.label}>
                 <input
                   id="eventDate"
                   // Text shows the placeholder; switches to a native date picker on focus
@@ -248,16 +250,16 @@ export function EnquiryFormSection({
                   {...register("eventDate")}
                   onFocus={() => setDateFocused(true)}
                   onBlur={() => setDateFocused(false)}
-                  placeholder="Select your preferred date if applicable."
+                  placeholder={fields.eventDate.placeholder}
                   className={inputClass}
                 />
               </Field>
 
-              <Field id="message" label="Message" error={errors.message?.message}>
+              <Field id="message" label={fields.message.label} error={errors.message?.message}>
                 <textarea
                   id="message"
                   {...register("message")}
-                  placeholder="Tell us more about your requirements."
+                  placeholder={fields.message.placeholder}
                   className={`${inputClass} h-[130px] resize-none`}
                   aria-invalid={errors.message ? "true" : "false"}
                 />
@@ -265,7 +267,7 @@ export function EnquiryFormSection({
             </div>
 
             <Button type="submit" disabled={isSubmitting} className="w-full sm:w-auto">
-              {isSubmitting ? "Submitting..." : "Submit Enquiry"}
+              {isSubmitting ? content.submittingLabel : content.submitLabel}
             </Button>
           </form>
           </RevealItem>

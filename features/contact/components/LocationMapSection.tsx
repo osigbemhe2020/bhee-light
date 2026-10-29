@@ -1,11 +1,10 @@
 import { MapPin } from "lucide-react";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { RevealGroup, RevealItem } from "@/components/shared/reveal";
-
-const MAPS_URL =
-  "https://www.google.com/maps/search/?api=1&query=Guzape+Extension+Abuja+Nigeria";
+import { contactContent } from "@/data/contact";
 
 export function LocationMapSection() {
+  const content = contactContent.location;
   return (
     <section className="w-full bg-[#F7F1E5]">
       <RevealGroup className="mx-auto flex max-w-[1440px] flex-col gap-8 px-[clamp(1rem,7vw,100px)] py-8 sm:gap-10 sm:py-12 xl:flex-row xl:items-center xl:gap-16">
@@ -14,22 +13,21 @@ export function LocationMapSection() {
           <div className="flex flex-col gap-[22px]">
             <SectionHeading
               size="wide"
-              eyebrow="Find Us"
-              title="Guzape Extension, Abuja, Nigeria"
+              eyebrow={content.eyebrow}
+              title={content.title}
             />
             <p className="text-[16px] leading-[19px] text-[#111110]">
-              Use Google Maps for directions to Guzape Extension, Abuja. Contact us before visiting so we can support
-              your enquiry appropriately.
+              {content.description}
             </p>
           </div>
 
           <a
-            href={MAPS_URL}
+            href={content.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center rounded-[10px] border border-[#0D733A] px-[22px] py-[14px] text-[14px] leading-[17px] text-[#0D733A] transition-colors hover:bg-[#0D733A]/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0D733A]"
           >
-            Open Google Maps
+            {content.mapButton}
           </a>
         </RevealItem>
 
@@ -37,7 +35,7 @@ export function LocationMapSection() {
         <RevealItem className="relative h-[260px] w-full min-w-0 flex-1 overflow-hidden rounded-[22px] border border-[#D6CCBA] bg-[#DCE8DF] sm:h-[430px]">
         <div
           role="img"
-          aria-label="Map placeholder showing Guzape Extension, Abuja"
+          aria-label={`Map placeholder showing ${content.address}`}
           className="absolute inset-0"
         >
           {/* Roads: drawn in a 776x430 space and cropped to fit */}
@@ -67,7 +65,7 @@ export function LocationMapSection() {
               Google Maps
             </span>
             <span className="font-[family-name:var(--font-inter)] text-[12px] leading-[15px] text-[#625F56]">
-              Guzape Extension, Abuja
+              {content.address}
             </span>
           </div>
         </div>

@@ -2,28 +2,26 @@ import Image from "next/image";
 import { Quote } from "lucide-react";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { RevealGroup, RevealItem } from "@/components/shared/reveal";
+import { aboutContent } from "@/data/about";
 
 export function OurStorySection() {
+  const content = aboutContent.story;
   return (
     <section className="w-full bg-[#FFFCF6]">
       <RevealGroup className="mx-auto flex min-h-[600px] max-w-[1440px] flex-col items-center gap-8 px-[clamp(1.5rem,5vw,100px)] py-10 lg:flex-row lg:gap-[72px]">
         <RevealItem className="flex w-full flex-1 flex-col items-start gap-6">
           <SectionHeading
-            eyebrow="OUR STORY"
-            title="Service, Enterprise And Continuous Growth."
+            eyebrow={content.eyebrow}
+            title={content.title}
             accentColor="orange"
           />
 
           <p className="text-[18px] font-semibold leading-[22px] text-[#092A22]">
-            Bhee Light 07 Unique Global Ventures is a Nigerian business providing professional services across event
-            staffing, hospitality, travel and tourism, business development, and natural refreshments.
+            {content.paragraphs[0]}
           </p>
 
           <p className="text-[16px] leading-[19px] text-[#625F56]">
-            Founded around the experience and vision of Blessing Chikaodi, the business brings together a passion for
-            people, service, entrepreneurship, and continuous growth. From providing professional ushers for events to
-            helping clients plan journeys and providing naturally made refreshments, our work is guided by one
-            commitment: To deliver quality, create positive experiences, and provide genuine value.
+            {content.paragraphs[1]}
           </p>
 
           {/* Commitment */}
@@ -35,7 +33,7 @@ export function OurStorySection() {
               className="shrink-0 text-[#C69A4A]"
             />
             <blockquote className="font-[family-name:var(--font-lora)] text-[length:clamp(1.125rem,1.7vw,1.5rem)] italic leading-[1.4] text-[#123D32]">
-              &ldquo;To deliver quality, create positive experiences, and provide genuine value.&rdquo;
+              &ldquo;{content.commitment}&rdquo;
             </blockquote>
           </figure>
         </RevealItem>
@@ -45,8 +43,8 @@ export function OurStorySection() {
           {/* Main image: 430 / 520 */}
           <div className="absolute left-0 top-0 h-[82.7%] w-[82.7%] overflow-hidden rounded-[22px]">
             <Image
-              src="/images/bhee-light-img-4.jpeg"
-              alt="Bhee Light usher greeting guests at an event"
+              src={content.images[0].src}
+              alt={content.images[0].alt}
               fill
               sizes="(min-width: 1024px) 430px, 80vw"
               className="object-cover"
@@ -56,8 +54,8 @@ export function OurStorySection() {
           {/* Detail image: 250x230, cream border cuts into the main image */}
           <div className="absolute bottom-0 right-0 z-10 h-[44.2%] w-[48.1%] overflow-hidden rounded-[22px] border-[10px] border-[#FFFCF6]">
             <Image
-              src="/images/bhee-light-img-1.jpeg"
-              alt="Naturally made Nigerian fruit drinks"
+              src={content.images[1].src}
+              alt={content.images[1].alt}
               fill
               sizes="(min-width: 1024px) 250px, 45vw"
               className="object-cover"

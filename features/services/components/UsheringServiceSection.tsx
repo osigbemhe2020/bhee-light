@@ -3,23 +3,21 @@ import { Check } from "lucide-react";
 import { Button } from "@/components/shared/button";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { RevealGroup, RevealItem } from "@/components/shared/reveal";
-import { getUsheringIncluded, getUsheringValues } from "@/data/services";
+import { servicesContent } from "@/data/services";
 
-export async function UsheringServiceSection({ id }: { id: string }) {
-  const [included, values] = await Promise.all([
-    getUsheringIncluded(),
-    getUsheringValues(),
-  ]);
+export function UsheringServiceSection() {
+  const content = servicesContent.ushering;
+  const { included, values } = content;
 
   return (
-    <section id={id} className="w-full bg-[#FFFCF6]">
+    <section id={content.id} className="w-full bg-[#FFFCF6]">
       <RevealGroup className="mx-auto flex max-w-[1440px] flex-col items-center gap-10 px-[clamp(1.5rem,7vw,100px)] py-14 lg:flex-row lg:gap-14">
         {/* Service imagery */}
         <RevealItem className="w-full shrink-0 lg:w-[440px]">
           <div className="relative aspect-[520/610] w-full max-w-[440px] overflow-hidden rounded-[22px]">
             <Image
-              src="/images/bhee-light-img-5.jpeg"
-              alt="Bhee Light ushers welcoming guests at a conference"
+              src={content.image.src}
+              alt={content.image.alt}
               fill
               sizes="(min-width: 1024px) 440px, 100vw"
               className="object-cover"
@@ -32,13 +30,12 @@ export async function UsheringServiceSection({ id }: { id: string }) {
           <div className="flex w-full flex-col gap-6">
             <SectionHeading
               size="wide"
-              eyebrow="Event Ushering & Guest Management"
-              title="Make Every Guest Feel Welcome"
+              eyebrow={content.eyebrow}
+              title={content.title}
             />
 
             <p className="text-[18px] leading-[22px] text-[#625F56]">
-              We provide elegant, well trained, and well behaved ushers for events, organisations, companies, and event
-              planners. Our event staffing service is designed to support a professional and welcoming guest experience.
+              {content.description}
             </p>
 
             {/* Included services */}
@@ -66,7 +63,7 @@ export async function UsheringServiceSection({ id }: { id: string }) {
           </div>
 
           <a href="/contact">
-            <Button>Enquire About Ushering</Button>
+            <Button>{content.button}</Button>
           </a>
         </RevealItem>
       </RevealGroup>

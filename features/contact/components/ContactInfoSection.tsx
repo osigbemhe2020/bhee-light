@@ -9,6 +9,7 @@ import {
 import { SectionHeading } from "@/components/shared/section-heading";
 import { Reveal } from "@/components/shared/reveal";
 import { getContactMethods, type ContactMethod } from "@/data/contact";
+import { contactContent } from "@/data/contact";
 
 const CONTACT_ICONS: Record<ContactMethod["icon"], LucideIcon> = {
   mapPin: MapPin,
@@ -27,12 +28,11 @@ export async function ContactInfoSection() {
         <Reveal className="flex max-w-[780px] flex-col gap-4">
           <SectionHeading
             size="wide"
-            eyebrow="Get in Touch With Us"
-            title="Bhee Light 07 Unique Global Ventures"
+            eyebrow={contactContent.intro.eyebrow}
+            title={contactContent.intro.title}
           />
           <p className="text-[18px] leading-[22px] text-[#625F56]">
-            Choose the contact method that works best for you. We welcome enquiries about our services and your
-            specific requirements.
+            {contactContent.intro.description}
           </p>
         </Reveal>
 
