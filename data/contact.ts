@@ -61,7 +61,7 @@ export const contactContent = {
   location: {
     eyebrow: "Find Us",
     title: "Guzape Extension, Abuja, Nigeria",
-    address: "Guzape Extension, Abuja",
+    address: "Guzape Extension, Abuja, Nigeria",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=Guzape+Extension+Abuja+Nigeria",
     description: "Use Google Maps for directions to Guzape Extension, Abuja. Contact us before visiting so we can support your enquiry appropriately.",
     mapButton: "Open Google Maps",

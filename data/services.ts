@@ -31,7 +31,7 @@ export const servicesContent = {
     description: "Premium naturally made Nigerian fruit and hibiscus beverages for events, catering, and corporate functions.",
     image: { src: "/images/bhee-light-img-2.jpeg", alt: "Naturally made refreshments" },
     quantityLabel: "Quantity",
-    quantity: "500+",
+    quantity: "100+",
     quantityCaption: "Bottles per event",
     highlight: "Perfect for large corporate events, weddings, and conferences. Fresh, healthy, and beautifully presented.",
     button: "Order Refreshments",

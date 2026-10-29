@@ -1,10 +1,10 @@
-import { MapPin } from "lucide-react";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { RevealGroup, RevealItem } from "@/components/shared/reveal";
 import { contactContent } from "@/data/contact";
 
 export function LocationMapSection() {
   const content = contactContent.location;
+  const embedUrl = `https://www.google.com/maps?q=${encodeURIComponent(content.address)}&output=embed`;
   return (
     <section className="w-full bg-[#F7F1E5]">
       <RevealGroup className="mx-auto flex max-w-[1440px] flex-col gap-8 px-[clamp(1rem,7vw,100px)] py-8 sm:gap-10 sm:py-12 xl:flex-row xl:items-center xl:gap-16">
@@ -31,45 +31,15 @@ export function LocationMapSection() {
           </a>
         </RevealItem>
 
-        {/* Google Maps placeholder */}
-        <RevealItem className="relative h-[260px] w-full min-w-0 flex-1 overflow-hidden rounded-[22px] border border-[#D6CCBA] bg-[#DCE8DF] sm:h-[430px]">
-        <div
-          role="img"
-          aria-label={`Map placeholder showing ${content.address}`}
-          className="absolute inset-0"
-        >
-          {/* Roads: drawn in a 776x430 space and cropped to fit */}
-          <svg
-            aria-hidden
-            viewBox="0 0 776 430"
-            preserveAspectRatio="xMidYMid slice"
-            className="absolute inset-0 h-full w-full"
-            fill="none"
-            strokeLinecap="round"
-          >
-            {/* Vertical side road (sits behind the main roads) */}
-            <line x1="214" y1="0" x2="214" y2="430" stroke="#C5D7CB" strokeWidth="8" strokeLinecap="butt" />
-            {/* Main roads */}
-            <line x1="56" y1="80" x2="683" y2="267" stroke="#FFFCF6" strokeWidth="28" />
-            <line x1="130" y1="320" x2="668" y2="84" stroke="#FFFCF6" strokeWidth="18" />
-          </svg>
-
-          {/* Pin */}
-          <div className="absolute left-1/2 top-[calc(50%-10px)] flex size-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#123D32] shadow-[0_12px_32px_rgba(18,61,50,0.094)] sm:size-[70px]">
-            <MapPin aria-hidden size={24} strokeWidth={1.7} className="text-[#E8CF98] sm:size-[30px]" />
-          </div>
-
-          {/* Map label */}
-          <div className="absolute bottom-3 left-3 flex max-w-[calc(100%-1.5rem)] flex-wrap items-center gap-x-2 gap-y-1 rounded-md bg-[#FFFCF6] px-3 py-2 shadow-[0_12px_32px_rgba(18,61,50,0.094)] sm:bottom-[22px] sm:left-[22px] sm:gap-[10px] sm:px-4 sm:py-3">
-            <span className="font-[family-name:var(--font-inter)] text-[12px] font-bold uppercase leading-[15px] text-[#092A22]">
-              Google Maps
-            </span>
-            <span className="font-[family-name:var(--font-inter)] text-[12px] leading-[15px] text-[#625F56]">
-              {content.address}
-            </span>
-          </div>
-        </div>
-          </RevealItem>
+        <RevealItem className="h-[260px] w-full min-w-0 flex-1 overflow-hidden rounded-[22px] border border-[#D6CCBA] bg-[#DCE8DF] sm:h-[430px]">
+          <iframe
+            title={`Google Maps location: ${content.address}`}
+            src={embedUrl}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="h-full w-full border-0"
+          />
+        </RevealItem>
         </RevealGroup>
     </section>
   );
